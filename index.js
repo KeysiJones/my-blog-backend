@@ -47,7 +47,7 @@ app.get("/posts", function (req, res) {
     }
 
     res.status(200).json(posts);
-  });
+  }).sort({ id: "desc" });
 });
 
 app.get("/posts/:postId", function (req, res) {
