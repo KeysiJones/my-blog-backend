@@ -76,24 +76,28 @@ app.get("/posts/:postId", function (req, res) {
 //   });
 // });
 
-// app.post("/cadastrar-cursos", auth, function (req, res) {
-//   const { terca, quarta, quinta, sabado } = req.body;
+app.post("/posts/new", auth, function (req, res) {
+  const { title, subtitle, body, created } = req.body;
 
-//   const aula = new Aula({
-//     terca: terca,
-//     quarta: quarta,
-//     quinta: quinta,
-//     sabado: sabado,
-//   });
+  const post = new Post({
+    title,
+    subtitle,
+    body,
+    created,
+  });
 
-//   aula.save(function (err, aulas) {
-//     if (err) {
-//       return res.status(500).json({ erro: err.message });
-//     }
+  generateSequence("postId").then((generatedSequence) => {
+    post.id = generatedSequence;
 
-//     res.status(200).json(aulas);
-//   });
-// });
+    post.save(function (err, posts) {
+      if (err) {
+        return res.status(500).json({ erro: err.message });
+      }
+
+      res.status(200).json(posts);
+    });
+  });
+});
 
 // app.post("/novasAulas/:aulasId", auth, function (req, res) {
 //   const { diaSemana, novaAula } = req.body;
