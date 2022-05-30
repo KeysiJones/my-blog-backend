@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const Post = require("./models/Post.js");
 const User = require("./models/User.js");
-const Counter = require("./models/Counter");
 const PORT = process.env.PORT || 3001;
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
